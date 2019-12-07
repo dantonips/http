@@ -7,6 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+
 	<title></title>
 </head>
 <body>
@@ -46,10 +47,18 @@
           reqres
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#" id="listauser">Listar Usuarios</a>
+          <a class="dropdown-item" href="#" id="unicouser">Unico Usuario</a>
+          <a class="dropdown-item" href="#" id="nencontrado">Usuario Unico Não Encontrado</a>
+          <a class="dropdown-item" href="#" id="listarecurso">Lista Recurso</a>
+          <a class="dropdown-item" href="#" id="unicorecurso">Unico Recurso</a>
+          <a class="dropdown-item" href="#" id="nfind">Unico Recurso Não Encontrado</a>
+          <a class="dropdown-item" href="#" id="crio">Crio</a>
+          <a class="dropdown-item" href="#" id="atualizaum">Atualizar1</a>
+          <a class="dropdown-item" href="#" id="atualizadois">Atualizar2</a>
+          <a class="dropdown-item" href="#" id="excluir">Excluir</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+         
         </div>
       </li>
       <li class="nav-item">
@@ -285,4 +294,116 @@
     </main>
      
 </body>
+<script type="text/javascript">
+	 document.getElementById("listauser").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("GET", "https://reqres.in/api/users?page=2");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("unicouser").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("GET", "https://reqres.in/api/users/2");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("nencontrado").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("GET", "https://reqres.in/api/users/23");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("listarecurso").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("GET", "https://reqres.in/api/users/23");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("unicorecurso").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("GET", "https://reqres.in/api/users/23");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("nfind").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("GET", "https://reqres.in/api/users/23");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("crio").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("POST", "https://reqres.in/api/users");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("atualizaum").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("PUT", "https://reqres.in/api/users/2");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("atualizadois").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("PATCH", "https://reqres.in/api/users/2");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+	document.getElementById("excluir").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+			ajax.open ("DELETE", "https://reqres.in/api/users/2");
+			ajax.onload = function () {
+    			console.log (ajax.responseText);
+			};
+			ajax.send ();
+
+	}
+</script>
 </html>
