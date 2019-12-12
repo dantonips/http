@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+
+
+	<title></title>
+</head>
+<body>
+	<header>
+		<nav id= "d1"class="navbar navbar-expand-lg navbar-light bg-light">
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#d1">Inicio <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="listauser" href="#d2">Listar Usuarios</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="unicouser" href="#d3">Unico Usuario</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="nencontrado" href="#d4">Usuario Unico Não Encontrado</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="listarecurso" href="#d5">Lista Recurso</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="unicorecurso" href="#d6">Unico Recurso</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="nfind" href="#d8">Unico Recurso Não Encontrado</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="crio" href="reqres.html">Criar</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="atualizaum" href="reqres.html">Atualizar1</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="atualizadois" href="reqres.html">Atualizar2</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="excluir" href="reqres.html">Excluir</a>
+					</li>
+				</ul>
+
+			</div>
+		</nav>
+	</header>
+
+
+	<main class="container">
+
+		<section >
+			<h2>Retorno</h2>
+
+			<div style="display: none" id="createRender">
+            <form>
+                <input placeholder="Nome" type="text" name="nome" id="nome">
+                <input placeholder="Emprego" type="text" name="job" id="job">
+                <input id="submit" type="submit"></input>
+            </form>
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            Job
+                        </th>
+                        <th>
+                            Criado:
+                        </th>
+                    </tr>
+                <tbody id="retorno">
+
+                </tbody>
+            </table>
+        		</div> 
+
+			<div style="display: none" id="userTable">
+				
+				<table class="table table-dark">
+					<thead>
+						<tr>
+							<th>
+								ID
+							</th>
+							<th>
+								Email
+							</th>
+							<th>
+								Nome
+							</th>
+							<th>
+								Sobrenome
+							</th>
+						</tr>
+					</thead>
+					<tbody id="tbody">
+
+					</tbody>
+				</table>
+			</div>
+			<span id="mostra"></span>
+		</section>
+
+		<section >
+			
+			<div style="display: none" id="colorTable">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>
+								ID
+							</th>
+							<th>
+								Nome
+							</th>
+							<th>
+								year
+							</th>
+							<th>
+								color
+							</th>
+							<th>
+								pantone_value
+							</th>
+						</tr>
+					</thead>
+					<tbody id="tbody1">
+
+					</tbody>
+				</table>
+			</div>
+			<span id="mostra"></span>
+		</section>
+
+		<section>
+			
+		</section>
+
+	</main>
+
+</body>
+<script type="text/javascript">
+	//Listar usuario
+	document.querySelector("#listauser").onclick = () => {
+		let div = document.querySelector("#userTable");
+		if (div.style.display == "none") {
+			div.style.display = "block";
+
+			var ajax = new XMLHttpRequest();
+
+			ajax.onreadystatechange = () => {
+
+				if (ajax.readyState == 4 && ajax.status == 200) {
+					let json = JSON.parse(ajax.responseText);
+
+					let tbody = document.getElementById("tbody");
+					tbody.innerHTML = null;
+
+
+					for (let i = 0; i < json.data.length; i++) {
+
+						let tr1 = document.createElement("tr");
+						let td1 = document.createElement("td");
+						let td2 = document.createElement("td");
+						let td3 = document.createElement("td");
+						let td4 = document.createElement("td");
+						let img = document.createElement("img");
+
+
+
+						tbody.appendChild(tr1);
+						tr1.appendChild(td1);
+						tr1.appendChild(td2);
+						tr1.appendChild(td3);
+						tr1.appendChild(td4);
+						tr1.appendChild(img);
+
+						td1.innerHTML = json.data[i].id;
+						td2.innerHTML = json.data[i].email;
+						td3.innerHTML = json.data[i].first_name;
+						td4.innerHTML = json.data[i].last_name;
+						img.src = json.data[i].avatar;
+					}
+
+				}
+
+			}
+			ajax.open("GET", "https://reqres.in/api/users?page=2");
+			ajax.send();
+		}
+		else {
+			div.style.display = "none";         
+		}
+	}
+
+//Listar usuario unico
+document.querySelector("#unicouser").onclick = () => {
+	let div = document.querySelector("#userTable");
+	if (div.style.display == "none") {
+		div.style.display = "block";
+
+		var ajax = new XMLHttpRequest();
+
+		ajax.onreadystatechange = () => {
+
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				let json = JSON.parse(ajax.responseText);
+
+				let tbody = document.getElementById("tbody");
+				tbody.innerHTML = null;
+
+				let tr1 = document.createElement("tr");
+				let td1 = document.createElement("td");
+				let td2 = document.createElement("td");
+				let td3 = document.createElement("td");
+				let td4 = document.createElement("td");
+				let img = document.createElement("img");
+
+
+
+				tbody.appendChild(tr1);
+				tr1.appendChild(td1);
+				tr1.appendChild(td2);
+				tr1.appendChild(td3);
+				tr1.appendChild(td4);
+				tr1.appendChild(img);
+
+				td1.innerHTML = json.data.id;
+				td2.innerHTML = json.data.email;
+				td3.innerHTML = json.data.first_name;
+				td4.innerHTML = json.data.last_name;
+				img.src = json.data.avatar;
+
+
+			}
+
+		}
+		ajax.open("GET", "https://reqres.in/api/users/2");
+		ajax.send();
+	}
+	else {
+		div.style.display = "none";         
+	}
+}  
+
+//Listar usuario Não econtrado
+document.querySelector("#nencontrado").onclick = () => {
+	let div = document.querySelector("#userTable");
+	if (div.style.display == "none") {
+		div.style.display = "block";
+
+		var ajax = new XMLHttpRequest();
+
+		ajax.onreadystatechange = () => {
+
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				let json = JSON.parse(ajax.responseText);
+
+				let tbody = document.getElementById("tbody");
+				tbody.innerHTML = null;
+
+
+				for (let i = 0; i < json.data.length; i++) {
+
+					let tr1 = document.createElement("tr");
+					let td1 = document.createElement("td");
+					let td2 = document.createElement("td");
+					let td3 = document.createElement("td");
+					let td4 = document.createElement("td");
+					let img = document.createElement("img");
+
+
+
+					tbody.appendChild(tr1);
+					tr1.appendChild(td1);
+					tr1.appendChild(td2);
+					tr1.appendChild(td3);
+					tr1.appendChild(td4);
+					tr1.appendChild(img);
+
+					td1.innerHTML = json.data[i].id;
+					td2.innerHTML = json.data[i].email;
+					td3.innerHTML = json.data[i].first_name;
+					td4.innerHTML = json.data[i].last_name;
+					img.src = json.data[i].avatar;
+				}
+
+			}
+			else{
+
+				let tr1 = document.createElement("tr");
+				let td1 = document.createElement("td");
+				tbody.appendChild(tr1);
+				tr1.appendChild(td1);
+				td1.innerHTML = "Usuario Não Encontrado";
+			}
+
+		}
+		ajax.open("GET", "https://reqres.in/api/users/23");
+		ajax.send();
+	}
+	else {
+
+	}
+}
+
+
+    //Listar recurso
+    document.querySelector("#listarecurso").onclick = () => {
+    	let div = document.querySelector("#colorTable");
+    	if (div.style.display == "none") {
+    		div.style.display = "block";
+
+    		var ajax = new XMLHttpRequest();
+
+    		ajax.onreadystatechange = () => {
+
+    			if (ajax.readyState == 4 && ajax.status == 200) {
+    				let json = JSON.parse(ajax.responseText);
+
+    				let tbody = document.getElementById("tbody1");
+    				tbody.innerHTML = null;
+
+
+    				for (let i = 0; i < json.data.length; i++) {
+
+    					let tr1 = document.createElement("tr");
+    					let td1 = document.createElement("td");
+    					let td2 = document.createElement("td");
+    					let td3 = document.createElement("td");
+    					let td4 = document.createElement("td");
+    					let td5 = document.createElement("td");
+
+
+
+
+    					tbody.appendChild(tr1);
+    					tr1.appendChild(td1);
+    					tr1.appendChild(td2);
+    					tr1.appendChild(td3);
+    					tr1.appendChild(td4);
+    					tr1.appendChild(td5);
+
+
+    					td1.innerHTML = json.data[i].id;
+    					td2.innerHTML = json.data[i].name;
+    					td3.innerHTML = json.data[i].year;
+    					td4.innerHTML = json.data[i].color;
+    					td5.innerHTML = json.data[i].pantone_value;
+
+    				}
+
+    			}
+
+    		}
+    		ajax.open("GET", "https://reqres.in/api/unknown");
+    		ajax.send();
+    	}
+    	else {
+    		div.style.display = "none";         
+    	}
+    }
+
+//Listar recurso unico
+document.querySelector("#unicorecurso").onclick = () => {
+	let div = document.querySelector("#colorTable");
+	if (div.style.display == "none") {
+		div.style.display = "block";
+
+		var ajax = new XMLHttpRequest();
+
+		ajax.onreadystatechange = () => {
+
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				let json = JSON.parse(ajax.responseText);
+
+				let tbody = document.getElementById("tbody1");
+				tbody.innerHTML = null;
+
+
+
+
+				let tr1 = document.createElement("tr");
+				let td1 = document.createElement("td");
+				let td2 = document.createElement("td");
+				let td3 = document.createElement("td");
+				let td4 = document.createElement("td");
+				let td5 = document.createElement("td");
+
+
+
+
+				tbody.appendChild(tr1);
+				tr1.appendChild(td1);
+				tr1.appendChild(td2);
+				tr1.appendChild(td3);
+				tr1.appendChild(td4);
+				tr1.appendChild(td5);
+
+				td1.innerHTML = json.data.id;
+				td2.innerHTML = json.data.name;
+
+				td3.innerHTML = json.data.year;
+				td4.innerHTML = json.data.color;
+				td5.innerHTML = json.data.pantone_value;
+
+
+
+			}
+
+		}
+		ajax.open("GET", "https://reqres.in/api/unknown/2");
+		ajax.send();
+	}
+	else {
+		div.style.display = "none";         
+	}
+}
+
+
+//Listar recurso unico não encontrado
+document.querySelector("#nfind").onclick = () => {
+	let div = document.querySelector("#colorTable");
+	if (div.style.display == "none") {
+		div.style.display = "block";
+
+		var ajax = new XMLHttpRequest();
+
+		ajax.onreadystatechange = () => {
+
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				let json = JSON.parse(ajax.responseText);
+
+				let tbody = document.getElementById("tbody1");
+				tbody.innerHTML = null;
+
+
+				
+
+				let tr1 = document.createElement("tr");
+				let td1 = document.createElement("td");
+				let td2 = document.createElement("td");
+				let td3 = document.createElement("td");
+				let td4 = document.createElement("td");
+				let td5 = document.createElement("td");
+				
+
+
+
+				tbody.appendChild(tr1);
+				tr1.appendChild(td1);
+				tr1.appendChild(td2);
+				tr1.appendChild(td3);
+				tr1.appendChild(td4);
+				tr1.appendChild(td5);
+				
+				td1.innerHTML = json.data.id;
+				td2.innerHTML = json.data.name;
+				
+				td3.innerHTML = json.data.year;
+				td4.innerHTML = json.data.color;
+				td5.innerHTML = json.data.pantone_value;
+				
+				
+
+			}
+			else{
+				let tbody = document.getElementById("tbody1");
+				tbody.innerHTML = null;
+				let tr1 = document.createElement("tr");
+				let td1 = document.createElement("td");
+				tbody.appendChild(tr1);
+				tr1.appendChild(td1);
+				td1.innerHTML = "Usuario Não Encontrado";
+			}
+
+		}
+		ajax.open("GET", "https://reqres.in/api/users/23");
+		ajax.send();
+	}
+	else {
+		
+	}
+}
+
+//Criar
+document.getElementById("crio").onclick = () => {
+        let div = document.querySelector("#createRender");
+        if (div.style.display == "none") {
+            div.style.display = "block";
+            document.getElementById("submit").onclick = (e) => {
+
+                e.preventDefault();
+
+                let ajax = new XMLHttpRequest();
+
+                let nome = document.getElementById("nome").value;
+                let sobrenome = document.getElementById("sobrenome").value;
+                let email = document.getElementById("email").value;
+
+
+
+                let usuario = { nome: nome, sobrenome: sobrenome, email: email };
+
+                let jsonVai = JSON.stringify(usuario);
+
+                let retorno = document.getElementById("retorno");
+
+                let tr1 = document.createElement("tr");
+                let td1 = document.createElement("td");
+                let td2 = document.createElement("td");
+                let td3 = document.createElement("td");
+                let td4 = document.createElement("td");
+                let td5 = document.createElement("td");
+
+
+
+
+
+                ajax.onreadystatechange = () => {
+                    if (ajax.readyState == 4 && ajax.status == 201) {
+                        let json = JSON.parse(ajax.responseText);
+
+                        retorno.appendChild(tr1);
+                        tr1.appendChild(td1);
+                        tr1.appendChild(td2);
+                        tr1.appendChild(td3);
+                        tr1.appendChild(td4);
+                        tr1.appendChild(td5);
+
+                        td1.innerHTML = json.id;
+                        td2.innerHTML = json.nome;
+                        td3.innerHTML = json.sobrenome;
+                        td4.innerHTML = json.email;
+                        td5.innerHTML = json.createdAt;
+
+                    }
+                }
+                ajax.open("POST", "https://reqres.in/api/users");
+                ajax.setRequestHeader("Content-type", "application/json");
+                ajax.send(jsonVai);
+            }
+        }
+        
+    }
+	
+/*document.getElementById("crio").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+		ajax.open ("POST", "https://reqres.in/api/users");
+		ajax.onload = function () {
+			console.log (ajax.responseText);
+		};
+		ajax.send ();
+
+	}*/
+	document.getElementById("atualizaum").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+		ajax.open ("PUT", "https://reqres.in/api/users/2");
+		ajax.onload = function () {
+
+		};
+		ajax.send ();
+
+	}
+	document.getElementById("atualizadois").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+		ajax.open ("PATCH", "https://reqres.in/api/users/2");
+		ajax.onload = function () {
+			console.log (ajax.responseText);
+		};
+		ajax.send ();
+
+	}
+	document.getElementById("excluir").onclick = function(event){
+		event.preventDefault();
+
+		var ajax = new XMLHttpRequest();
+		ajax.open ("DELETE", "https://reqres.in/api/users/2");
+		ajax.onload = function () {
+			console.log (ajax.responseText);
+		};
+		ajax.send ();
+
+	}
+	
+
+</script>
+</html>
